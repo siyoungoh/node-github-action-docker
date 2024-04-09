@@ -22,7 +22,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: |
-        docker build . --file Dockerfile --tag nodejs-app:$(date +%s)
+        docker build . --file Dockerfile
     - name: Run the Docker container
       run: |
         docker run -d -p 8080:8080 --name mynodeapp nodejs-app
