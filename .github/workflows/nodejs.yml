@@ -35,8 +35,8 @@ jobs:
 
     # Test dependencies are typically installed via a project's package.json
     # and should ideally not be handled separately in CI workflows.
-    # - name: Install test dependencies
-    #   run: npm install mocha chai chai-http
+    - name: Install test dependencies
+      run: npm install mocha chai chai-http
     
     - name: Run tests
       run: npm test
