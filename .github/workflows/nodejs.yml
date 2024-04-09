@@ -1,0 +1,32 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    services:
+      docker:
+        image: docker:20.10.12
+        options: --privileged
+        ports:
+          - 8080:8080
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: |
+        docker build . --file Dockerfile --tag nodejs-app:$(date +%s)
+    - name: Run the Docker container
+      run: |
+        docker run -d -p 8080:8080 --name mynodeapp nodejs-app
+    - name: Install test dependencies
+      run: npm install mocha chai chai-http
+    - name: Run tests
+      run: npm test
