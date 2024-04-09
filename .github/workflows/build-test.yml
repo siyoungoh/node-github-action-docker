@@ -18,6 +18,12 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Use Node.js 20
+        run: |
+          sudo apt-get install -y nodejs
+          sudo apt-get install -y npm
+          npm install -g npm@latest
+
       - name: Build Docker image
         run: docker build -t my-node-app .
 
